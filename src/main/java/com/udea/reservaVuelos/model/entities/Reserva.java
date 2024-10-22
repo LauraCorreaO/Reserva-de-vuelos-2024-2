@@ -1,6 +1,9 @@
 package com.udea.reservaVuelos.model.entities;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,28 +18,35 @@ public class Reserva {
     private String numeroReserva; // numeroReserva
 
     @Column(name = "fecha_reserva", nullable = false)
-    private Date fechaReserva; // fechaReserva
+    private String fechaReserva; // fechaReserva
 
     @Column(name = "numero_pasajeros", nullable = false)
     private int numeroPasajeros; // numeroPasajeros
 
     @Column(name = "id_vuelo_ida")
-    private Long idVueloIda; // FK idVueloIda
+    private String idVueloIda; // FK idVueloIda
 
     @Column(name = "id_vuelo_vuelta")
-    private Long idVueloVuelta; // FK idVueloVuelta
+    private String idVueloVuelta; // FK idVueloVuelta
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
+    private EstadoReserva estado; // Estado de la reserva
 
+    @Column(name = "fecha_Cancelacion")
+    private LocalDateTime fechaCancelacion;
     // Constructor
     public Reserva() {
     }
 
-    public Reserva(Long idReserva, String numeroReserva, Date fechaReserva, int numeroPasajeros, Long idVueloIda, Long idVueloVuelta) {
+    public Reserva(Long idReserva, String numeroReserva, String fechaReserva, int numeroPasajeros, String idVueloIda, String idVueloVuelta, EstadoReserva estado, LocalDateTime fechaCancelacion) {
         this.idReserva = idReserva;
         this.numeroReserva = numeroReserva;
         this.fechaReserva = fechaReserva;
         this.numeroPasajeros = numeroPasajeros;
         this.idVueloIda = idVueloIda;
         this.idVueloVuelta = idVueloVuelta;
+        this.estado = estado;
+        this.fechaCancelacion = fechaCancelacion;
     }
 
     // Getters y Setters
@@ -56,11 +66,11 @@ public class Reserva {
         this.numeroReserva = numeroReserva;
     }
 
-    public Date getFechaReserva() {
+    public String getFechaReserva() {
         return fechaReserva;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
+    public void setFechaReserva(String fechaReserva) {
         this.fechaReserva = fechaReserva;
     }
 
@@ -72,19 +82,27 @@ public class Reserva {
         this.numeroPasajeros = numeroPasajeros;
     }
 
-    public Long getIdVueloIda() {
+    public String getIdVueloIda() {
         return idVueloIda;
     }
 
-    public void setIdVueloIda(Long idVueloIda) {
+    public void setIdVueloIda(String idVueloIda) {
         this.idVueloIda = idVueloIda;
     }
 
-    public Long getIdVueloVuelta() {
+    public String getIdVueloVuelta() {
         return idVueloVuelta;
     }
 
-    public void setIdVueloVuelta(Long idVueloVuelta) {
+    public void setIdVueloVuelta(String idVueloVuelta) {
         this.idVueloVuelta = idVueloVuelta;
     }
+
+    public EstadoReserva getEstado() {return estado;}
+
+    public void setEstado(EstadoReserva estado) { this.estado = estado; }
+
+    public LocalDateTime getFechaCancelacion() {return fechaCancelacion;}
+
+    public void setFechaCancelacion(LocalDateTime fechaCancelacion) { this.fechaCancelacion = fechaCancelacion; }
 }

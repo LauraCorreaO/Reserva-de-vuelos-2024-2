@@ -1,0 +1,78 @@
+type Reserva {
+    idReserva: String!
+    numeroReserva: String!
+    fechaReserva: String!
+    numeroPasajeros: Int!
+    estado: EstadoReserva!
+    pasajeros: [ReservaPasajero]
+    idVueloIda: String
+    idVueloVuelta: String
+}
+
+input ReservaInput {
+    numeroReserva: String!
+    fechaReserva: String!
+    numeroPasajeros: Int!
+    pasajeros: [PasajeroInput!]!
+    idVueloIda: ID
+    idVueloVuelta: ID
+    estado:EstadoReserva,
+}
+
+input ReservaModificarInput {
+    numeroPasajeros: Int!
+    pasajeros: [PasajeroInput!]!
+    idVueloIda: String
+    idVueloVuelta: String
+    estado:EstadoReserva,
+}
+
+type ReservaPasajero {
+    idReservaPasajero: ID!
+    reserva: Reserva!
+    pasajero: Pasajero!
+    accesibilidad: String
+    equipajeAdicional: Boolean
+    adiciones: String
+    asientoElegido: Boolean
+}
+
+enum EstadoReserva {
+    ACTIVA,
+    CANCELADA,
+    CONFIRMADA
+}
+
+type Pasajero {
+    idPasajero: String!
+    numeroDocumento: String!
+    nombre: String!
+    apellido: String!
+    fechaNacimiento: String!
+}
+
+input PasajeroInput {
+    nombre: String!
+    apellido: String!
+    tipoDocumento: String!,
+    numeroDocumento: String!,
+    correo: String!,
+    telefono:String,
+    accesibilidadesIds: [ID],
+    adicionesIds: [ID],
+    equipajeAdicional: Boolean,
+    asientoElegido: Boolean,
+    idVueloIda: ID,
+    idVueloVuelta:ID
+}
+
+type Query {
+    obtenerReserva(numeroReserva: String!, numeroDocumento: String!): [ReservaPasajero!]
+}
+
+type Mutation {
+    crearReserva(input: ReservaInput!): Reserva!,
+    cancelarReserva(idReserva: ID!): Reserva!
+    modificarReserva(idReserva: ID!, input: ReservaModificarInput!): Reserva!
+}
+

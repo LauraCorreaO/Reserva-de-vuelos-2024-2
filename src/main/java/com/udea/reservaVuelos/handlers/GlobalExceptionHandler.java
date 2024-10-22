@@ -1,6 +1,7 @@
 package com.udea.reservaVuelos.handlers;
 
 import com.udea.reservaVuelos.model.entities.ErrorResponse;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -31,6 +32,12 @@ public class GlobalExceptionHandler {
                 ex.getBindingResult().toString()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    public static class NotFoundException extends RuntimeException {
+        public NotFoundException(String message) {
+            super(message);
+        }
     }
 
     @ExceptionHandler(Exception.class)

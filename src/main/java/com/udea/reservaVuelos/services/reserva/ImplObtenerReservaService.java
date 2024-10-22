@@ -26,6 +26,7 @@ public class ImplObtenerReservaService implements ObtenerReservaServiceInterface
 
     @Override
     public List<ReservaPasajero> obtenerReservaPorNumeroReservaYNumeroDocumento(String numeroReserva, String numeroDocumento) {
+        try {
         // Buscar reserva por número de reserva
         Optional<Reserva> reservaOpt = reservaRepository.findByNumeroReserva(numeroReserva);
         if (reservaOpt.isEmpty()) {
@@ -46,5 +47,8 @@ public class ImplObtenerReservaService implements ObtenerReservaServiceInterface
             throw new RuntimeException("No se encontraron datos de reserva para el pasajero con los IDs proporcionados");
         }
         return reservasPasajeros;
+    } catch (Exception e) {
+        // Registrar el error (puedes usar un logger aquí)
+        throw new RuntimeException("Error al obtener la reserva: " + e.getMessage(), e);
     }
-}
+}}

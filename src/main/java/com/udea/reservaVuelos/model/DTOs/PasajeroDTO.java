@@ -1,6 +1,9 @@
 package com.udea.reservaVuelos.model.DTOs;
 
+import java.util.List;
+
 public class PasajeroDTO {
+    private Long id;
     private String nombre;
     private String apellido;
     private String tipoDocumento;
@@ -14,6 +17,17 @@ public class PasajeroDTO {
     private Boolean adiciones; // Booleano para indicar si se han solicitado adiciones
     private Boolean asientoElegido; // Booleano para indicar si se ha elegido un asiento
 
+    private List<Long> accesibilidadesIds; // Lista de IDs de accesibilidades
+
+    private List<Long> adicionesIds;
+
+    public Long getId() {
+        return id; // Método que devuelve el ID del pasajero
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -93,4 +107,20 @@ public class PasajeroDTO {
     public void setAsientoElegido(Boolean asientoElegido) {
         this.asientoElegido = asientoElegido;
     }
+    public List<Long> getAccesibilidadesIds() {
+        return accesibilidadesIds;
+    }
+
+    public void setAccesibilidadesIds(List<Long> accesibilidadesIds) {
+        this.accesibilidadesIds = accesibilidadesIds;
+    }
+
+    public List<Long> getAdicionesIds() {
+        return adicionesIds;
+    }
+
+    public void setAdicionesIds(List<Long> adicionesIds) {
+        this.adicionesIds = adicionesIds;
+    }
+
 }

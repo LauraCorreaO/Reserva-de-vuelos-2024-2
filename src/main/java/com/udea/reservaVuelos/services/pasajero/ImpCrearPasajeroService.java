@@ -21,6 +21,7 @@ public class ImpCrearPasajeroService implements CrearPasajeroService {
         if (pasajeroDTO == null) {
             throw new IllegalArgumentException("El DTO del pasajero no puede ser nulo.");
         }
+
         //TODO: VALIDACIÓN: Logica de que vaya y compare la cedula, el correo y el numero del pasajero,
         // en caso de que la cedula no exista quiere decir que el usuario es nuevo entonces si se inserta, si la cedula
         // ya existe y el correo y numero de telefono son iguales a los que ya habia registrados se devuelve el pasajero
